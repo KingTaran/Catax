@@ -1,6 +1,7 @@
 import pymongo
 import pandas as pd
 import time
+from datetime import datetime
 
 # Set up your MongoDB connection
 client = pymongo.MongoClient("mongodb://gewgawrav:catax1234@chongodb.catax.me")
@@ -24,10 +25,7 @@ index_collection = client_local[local_database]['INDEX']
 start_time = time.time()
 
 # Iterate through each collection name
-for collection_name in collection_names:
-    # Measure the start time
-    start_time1 = time.time()
-    
+for collection_name in collection_names:    
     # Access the specified collection
     collection = db[collection_name]
 
@@ -93,12 +91,7 @@ for collection_name in collection_names:
                 client_local[local_database][local_collection_name].insert_many(data_to_insert)
             else:
                 print("Warning: 'processed_data' is an empty list.")
-
-            # Measure the end time
-            end_time1 = time.time()
-            # Calculate the execution time
-            execution_time = end_time1 - start_time1
-
+                
             # Create a document with loop details
             loop_details = {
                 'exchange': collection_name,
@@ -109,7 +102,7 @@ for collection_name in collection_names:
                 'total_documents': total_documents,
                 'deleted_documents': deleted_documents,
                 'type':'hourly',
-                'processed_at': execution_time
+                'processed_at': datetime.now()
             }
 
             # Insert the document into the INDEX collection
