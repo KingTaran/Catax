@@ -5,7 +5,7 @@ import time
 # Set up your MongoDB connection
 client = pymongo.MongoClient("mongodb://gewgawrav:catax1234@chongodb.catax.me")
 database_name = "MasterCC"
-collection_name = "BTCAlpha"
+collection_name = "HuobiPro"
 
 # Access the specified database and collection
 db = client[database_name]
