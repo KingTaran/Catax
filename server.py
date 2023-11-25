@@ -8,7 +8,7 @@ client = pymongo.MongoClient("mongodb://gewgawrav:catax1234@chongodb.catax.me")
 database_name = "MasterCC"
 
 # Define the four collection names
-collection_names = ["bitflyereu"]
+collection_names = ["CoinCorner"]
 
 # Access the specified database
 db = client[database_name]
