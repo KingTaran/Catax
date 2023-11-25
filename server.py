@@ -7,8 +7,8 @@ from datetime import datetime
 client = pymongo.MongoClient("mongodb://gewgawrav:catax1234@chongodb.catax.me")
 database_name = "MasterCC"
 
-# Define the four collection names
-collection_names = ["CoinCorner"]
+# Define the collection names
+collection_names = database.list_collection_names()
 
 # Access the specified database
 db = client[database_name]
