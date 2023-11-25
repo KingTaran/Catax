@@ -89,25 +89,26 @@ for collection_name in collection_names:
             # Insert data into the local MongoDB collection
             if data_to_insert:
                 client_local[local_database][local_collection_name].insert_many(data_to_insert)
+
+                # Create a document with loop details
+                loop_details = {
+                    'exchange': collection_name,
+                    'parent_sym': parent_sym_value,
+                    'child_sym': child_sym_value,
+                    'startdate': df_sorted['time'].min(),
+                    'enddate': df_sorted['time'].max(),
+                    'total_documents': total_documents,
+                    'deleted_documents': deleted_documents,
+                    'type':'hourly',
+                    'processed_at': datetime.now()
+                }
+
+                # Insert the document into the INDEX collection
+                index_collection.insert_one(loop_details)
+
             else:
                 print("Warning: 'processed_data' is an empty list.")
                 
-            # Create a document with loop details
-            loop_details = {
-                'exchange': collection_name,
-                'parent_sym': parent_sym_value,
-                'child_sym': child_sym_value,
-                'startdate': df_sorted['time'].min(),
-                'enddate': df_sorted['time'].max(),
-                'total_documents': total_documents,
-                'deleted_documents': deleted_documents,
-                'type':'hourly',
-                'processed_at': datetime.now()
-            }
-
-            # Insert the document into the INDEX collection
-            index_collection.insert_one(loop_details)
-
 # Measure the end time
 end_time = time.time()
 
