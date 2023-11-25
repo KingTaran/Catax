@@ -25,6 +25,9 @@ start_time = time.time()
 
 # Iterate through each collection name
 for collection_name in collection_names:
+    # Measure the start time
+    start_time1 = time.time()
+    
     # Access the specified collection
     collection = db[collection_name]
 
@@ -91,6 +94,11 @@ for collection_name in collection_names:
             else:
                 print("Warning: 'processed_data' is an empty list.")
 
+            # Measure the end time
+            end_time1 = time.time()
+            # Calculate the execution time
+            execution_time = end_time - start_time
+
             # Create a document with loop details
             loop_details = {
                 'exchange': collection_name,
@@ -100,7 +108,8 @@ for collection_name in collection_names:
                 'enddate': df_sorted['time'].max(),
                 'total_documents': total_documents,
                 'deleted_documents': deleted_documents,
-                'type':'hourly'
+                'type':'hourly',
+                'processed_at': execution_time
             }
 
             # Insert the document into the INDEX collection
