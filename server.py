@@ -97,7 +97,7 @@ for collection_name in collection_names:
             # Measure the end time
             end_time1 = time.time()
             # Calculate the execution time
-            execution_time = end_time - start_time
+            execution_time = end_time1 - start_time1
 
             # Create a document with loop details
             loop_details = {
